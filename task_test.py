@@ -4,7 +4,7 @@ import main
 
 class TaskTest(unittest.TestCase):
     @classmethod
-    def setUp(cls):
+    def setUpClass(cls):
 
         cls.posts = \
             [
@@ -144,7 +144,7 @@ class TaskTest(unittest.TestCase):
 
     def test_get_users_with_posts(self):
         connected_data = main.get_users_with_posts(self.users, self.posts)
-        self.assertDictEqual(self.connected_posts_with_users, connected_data, "Failed on connecting users with posts")
+        self.assertEqual(self.connected_posts_with_users, connected_data, "Failed on connecting users with posts")
 
     def test_get_not_unique_titles(self):
         data = main.get_not_unique_titles(self.posts)
@@ -169,7 +169,9 @@ class TaskTest(unittest.TestCase):
 
     def test_get_distance_between_users(self):
         distances = main.get_distance_between_users(self.users)
-        self.assertEqual(['The closest user to Bret lives John', 'The closest user to John lives Bret'], distances)
+        self.assertEqual(['The closest user to Bret lives John',
+                          'The closest user to John lives Bret',
+                          'The closest user to Erika lives Bret'], distances)
 
 
 if __name__ == "__main__":

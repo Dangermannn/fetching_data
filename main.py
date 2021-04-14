@@ -1,10 +1,7 @@
 import json
-import math
 import sys
 import urllib.request
 import haversine as hs
-
-from collections import Counter
 
 POSTS_URL = "https://jsonplaceholder.typicode.com/posts"
 USERS_URL = "https://jsonplaceholder.typicode.com/users"
@@ -56,7 +53,7 @@ def get_distance_between_users(users):
     if len(users) < 2:
         return ["there are not enough users to compare"]
 
-    for i in range(0, len(users) - 1):
+    for i in range(0, len(users)):
         distance = sys.maxsize
         index = -1
         for j in range(0, len(users) - 1):
@@ -66,9 +63,8 @@ def get_distance_between_users(users):
             if d < distance:
                 distance = d
                 index = j
-        msgs_to_return.append(f"The closest user to { users[i]['username'] } lives {users[index]['username']}")
+        msgs_to_return.append(f"The closest user to {users[i]['username']} lives {users[index]['username']}")
     return msgs_to_return
-
 
 def main():
     data = get_users_with_posts(get_data_as_json(USERS_URL), get_data_as_json(POSTS_URL))
@@ -79,6 +75,7 @@ def main():
     print(p)
 
     print_users_number_of_posts(data)
+    print(get_distance_between_users(users))
 
 
 if __name__ == '__main__':
